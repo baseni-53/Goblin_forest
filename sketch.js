@@ -4,12 +4,13 @@ function preload() {
   groundSheet = loadImage('oak_woods_v1.0/oak_woods_tileset.png')
   backgroundSheet = loadImage('oak_woods_v1.0/background/background_layer_1.png')
   moneySheet = loadImage('Tiny Swords (Update 010)/Resources/Resources/G_Idle_(NoShadow).png')
+  fenceSheet = loadImage('oak_woods_v1.0/decorations/sign.png')
 }
 
 function setup() {
   new Canvas();
 
-  player = new Sprite(canvas.w / 2, canvas.h / 2);
+  player = new Sprite(250, 300);
   player.width = 50;
   player.height = 80;
   player.bounciness = 0;
@@ -55,6 +56,25 @@ function setup() {
   txt2.collider = 'none'
   txt2.fill= 'red'
   txt2.height = 15
+
+  fences = new Sprite(400, 585)
+  fences.height = 40;
+  fences.width = 40;
+  fences.scale = 2
+  fences.collider = 'none'
+  fences.spriteSheet = fenceSheet;
+  fences.addAni (
+    {w:32, h:32, row:0, frames:0},
+  )
+  
+  ftxt = new Sprite()
+  ftxt.text = 'Collect all the money to win!'
+  ftxt.textSize = 30;
+  ftxt.collider = 'none';
+  ftxt.fill= 'white';
+  ftxt.height = 1;
+  ftxt.width = 1;
+  ftxt.opacity = 0;
 
   goblin = new Sprite(600, 500);
   goblin.spriteSheet = enemySheet;
@@ -160,7 +180,8 @@ function setup() {
 
 
   new Tiles(
-    ['                                                                      m                                           ',
+    [ '                                                                                                     m       m   ',
+      '                                                                     m                                           ',
       '                                        m                               111111111111111111       1111111111111111',
       '                                                                  111111rrrrrrrrrrrrrrrrrr       rrrrrrrrrrrrrrrr',
       '           m                   gggggggggggg11    11gggggggggggg111rrrrrrrrrrrrrrrrrr            grrrrrrrrrrrrrrrr',
@@ -183,6 +204,7 @@ function setup() {
   player.debug = true;
   goblin.debug = true;
   sword.debug = true;
+  fences.debug = true;
 }
 
 let canJump = true;
@@ -226,6 +248,9 @@ async function draw() {
   }
   if (player.collides(rock)) {
     canJump = true;
+  }
+  if (player.overlaps(fences)) {
+    ftxt.opacity = 100;
   }
   if (keyIsDown('a')) {
     player.velocity.x = -5;
@@ -306,6 +331,9 @@ async function draw() {
     await player.changeAni('attack2')
     player.changeAni('idle')
   }
+  if (score == 10) {
+    
+  }
   camera.y = player.y
   camera.x = player.x
   sword.x = player.x + hitboxOffset
@@ -319,5 +347,8 @@ async function draw() {
 
   txt2.y = goblin2.y -50
   txt2.x = goblin2.x
+
+  ftxt.x = fences.x
+  ftxt.y = fences.y -100
 }
 
