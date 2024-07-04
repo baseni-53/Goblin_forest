@@ -331,8 +331,8 @@ async function draw() {
     await player.changeAni('attack2')
     player.changeAni('idle')
   }
-  if (score == 10) {
-    
+  if (score >= 10) {
+
   }
   camera.y = player.y
   camera.x = player.x
