@@ -165,7 +165,7 @@ function setup() {
   moneys.addAni(
     { w: 128, h: 128, row: 0, col: 0 }
   )
-  moneys.debug = true
+ 
 
   food = new Group()
   food.height = -45;
@@ -176,7 +176,7 @@ function setup() {
   food.addAni(
     { w: 128, h: 128, row: 0, col: 0 }
   )
-  food.debug = true
+  
 
 
   ground = new Group();
@@ -470,6 +470,61 @@ async function draw() {
     score = 0;
     lvl1 = 0;
     ftxt.remove()
+    goblin.remove()
+    goblin1.remove()
+    goblin2.remove()
+    goblin = new Sprite(600, 500);
+
+  goblin.spriteSheet = enemySheet;
+  goblin.width = 50;
+  goblin.height = 68;
+  goblin.bounciness = 0;
+  goblin.rotationLock = true;
+  goblin.velocity.x = 4
+  goblin.addAnis({
+    idle: { w: 192, h: 192, row: 0, frames: 7 },
+    run: { w: 192, h: 192, row: 1, frames: 6 },
+    attack: { w: 192, h: 192, row: 2, frames: 6 }
+  })
+  goblin.anis.offset.y = 1;
+  goblin.anis.offset.x = -5
+  goblin.mirror.x = true;
+  goblin.changeAni('idle')
+
+  goblin1 = new Sprite(600, 500);
+  goblin1.spriteSheet = enemySheet;
+  goblin1.width = 50;
+  goblin1.height = 68;
+  goblin1.bounciness = 0;
+  goblin1.rotationLock = true;
+  goblin1.velocity.x = 4
+  goblin1.addAnis({
+    idle: { w: 192, h: 192, row: 0, frames: 7 },
+    run: { w: 192, h: 192, row: 1, frames: 6 },
+    attack: { w: 192, h: 192, row: 2, frames: 6 }
+  })
+  goblin1.anis.offset.y = 1;
+  goblin1.anis.offset.x = -5
+  goblin1.mirror.x = true;
+  goblin1.changeAni('idle')
+
+  goblin2 = new Sprite(600, 500);
+  goblin2.spriteSheet = enemySheet;
+  goblin2.width = 50;
+  goblin2.height = 68;
+  goblin2.bounciness = 0;
+  goblin2.rotationLock = true;
+  goblin2.velocity.x = 4
+  goblin2.addAnis({
+    idle: { w: 192, h: 192, row: 0, frames: 7 },
+    run: { w: 192, h: 192, row: 1, frames: 6 },
+    attack: { w: 192, h: 192, row: 2, frames: 6 }
+  })
+  goblin2.anis.offset.y = 1;
+  goblin2.anis.offset.x = -5
+  goblin2.mirror.x = true;
+  goblin2.changeAni('idle')
+
     goblinHealth = 23;
     goblin1Health = 23;
     goblin2Health = 23;
@@ -536,7 +591,7 @@ if (player.collides(ground)) {
  }
 
  async function win() {
-  background(255);
+  background(230);
 
   player.remove()
   goblin.remove()
@@ -553,7 +608,7 @@ if (player.collides(ground)) {
   fire2.remove()
   ftxt.remove()
 
-  fill(230)
+  fill(0)
   text('🎉 YOU WIN 🎉', 600, 300)
   textSize(20)
  }
