@@ -275,22 +275,22 @@ let lvl1 = 1;
 let gobatck = false;
 
 async function enemyAttack() {
-  await goblin.changeAni('attack')
   gobatck = true;
+  await goblin.changeAni('attack')
   goblin.changeAni('idle')
   gobatck = false;
 }
 
 async function enemyAttack1() {
-  await goblin1.changeAni('attack')
   gobatck = true;
+  await goblin1.changeAni('attack')
   goblin1.changeAni('idle')
   gobatck = false;
 }
 
 async function enemyAttack2() {
-  await goblin2.changeAni('attack')
   gobatck = true;
+  await goblin2.changeAni('attack')
   goblin2.changeAni('idle')
   gobatck = false;
 }
@@ -427,7 +427,7 @@ async function draw() {
   if (health == 0) {
   player.dead = true;
   }
-  if (sword.overlapping(goblin) && attacking == true) {
+  if (sword.overlapping(goblin)) {
     enemyAttack()
   }
   if (fire.overlaps(player) && gobatck == true) {
@@ -440,10 +440,10 @@ async function draw() {
     goblin.mirror.x = false
   }
 
-  if (sword.overlapping(goblin1) && attacking == true) {
+  if (sword.overlapping(goblin1)) {
     enemyAttack1()
   }
-  if (fire1.overlaps(player)) {
+  if (fire1.overlaps(player) && gobatck == true) {
     health -= 1;
   }
   if (fire1.mirror.x == false) {
@@ -453,7 +453,7 @@ async function draw() {
     goblin1.mirror.x = false
   }
 
-  if (sword.overlapping(goblin2) && attacking == true) {
+  if (sword.overlapping(goblin2) ) {
     enemyAttack2()
   }
   if (fire2.overlaps(player) && gobatck == true) {
