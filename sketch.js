@@ -256,11 +256,6 @@ map2 =
 
   world.gravity.y = 9.81;
   allSprites.pixelPerfect = true;
-  player.debug = true;
-  goblin.debug = true;
-  sword.debug = true;
-  fences.debug = true;
-  fire.debug = true;
 }
 
 let canJump = true;
